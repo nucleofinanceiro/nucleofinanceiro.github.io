@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#1d5b79">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Financeiro">
+<title>Núcleo Financeiro</title>
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icons/icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="icons/icon-180.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div id="boot" class="boot">Carregando…</div>
+
+<section id="auth" class="auth" hidden>
+  <div class="authcard">
+    <div class="brand big"><b class="appName">Núcleo Financeiro</b><span>Acompanhamento financeiro para pequenas empresas</span></div>
+    <div class="seg" id="authTabs" role="tablist">
+      <label><input type="radio" name="am" value="entrar" checked>Entrar</label>
+      <label><input type="radio" name="am" value="criar">Criar conta</label>
+    </div>
+    <form id="fAuth" class="form1" novalidate>
+      <label class="f" id="wEmail">E-mail<input type="email" id="aEmail" autocomplete="email" required></label>
+      <label class="f" id="wSenha">Senha<input type="password" id="aSenha" autocomplete="current-password" minlength="8"></label>
+      <label class="f" id="wSenha2" hidden>Repita a senha<input type="password" id="aSenha2" autocomplete="new-password"></label>
+      <button class="btn pri" type="submit" id="aGo">Entrar</button>
+      <button class="link" type="button" id="aEsqueci">Esqueci a senha</button>
+      <p class="msg" id="aMsg" role="status"></p>
+    </form>
+  </div>
+</section>
+
+<section id="onb" class="auth" hidden>
+  <div class="authcard wide">
+    <div class="brand big"><b class="appName">Núcleo Financeiro</b><span id="onbUser"></span></div>
+    <div class="grid2">
+      <form id="fNovaEmp" class="card form1" novalidate>
+        <h2>Cadastrar uma empresa</h2>
+        <p class="hint">Você será o dono e poderá convidar sócios ou o contador.</p>
+        <label class="f">Nome da empresa<input type="text" id="nNome" placeholder="Ex.: Núcleo Podcast & Editora"></label>
+        <label class="f">CNPJ (opcional)<input type="text" id="nCnpj" placeholder="00.000.000/0000-00"></label>
+        <label class="f">Banco principal (opcional)<input type="text" id="nBanco" placeholder="Ex.: Inter PJ"></label>
+        <button class="btn pri" type="submit">Criar empresa</button>
+      </form>
+      <form id="fConvite" class="card form1" novalidate>
+        <h2>Entrar com um convite</h2>
+        <p class="hint">Recebeu um código de um sócio ou cliente? Cole aqui.</p>
+        <label class="f">Código do convite<input type="text" id="cCodigo" placeholder="Ex.: 3fa9c21b7e" autocomplete="off"></label>
+        <button class="btn" type="submit">Usar convite</button>
+      </form>
+    </div>
+    <div class="row" style="justify-content:space-between"><button class="link" type="button" id="onbVoltar" hidden>Voltar para minhas empresas</button><button class="link" type="button" data-act="sair">Sair da conta</button></div>
+  </div>
+</section>
+
+<div class="app" id="app" hidden>
+  <nav class="nav" aria-label="Seções">
+    <div class="brand"><b class="appName">Núcleo Financeiro</b>
+      <select id="empSel" aria-label="Empresa"></select>
+      <span id="papelLbl" class="chip"></span>
+    </div>
+    <ul id="navList">
+      <li><a href="#painel" data-route="painel">Painel</a></li>
+      <li><a href="#lancamentos" data-route="lancamentos">Lançamentos</a></li>
+      <li><a href="#impostos" data-route="impostos">Impostos <span class="badge" id="bdgImp" hidden></span></a></li>
+      <li><a href="#pro-labore" data-route="pro-labore">Pró-labore</a></li>
+      <li><a href="#extratos" data-route="extratos">Extratos <span class="badge" id="bdgExt" hidden></span></a></li>
+      <li><a href="#open-finance" data-route="open-finance">Open Finance</a></li>
+      <li><a href="#configuracoes" data-route="configuracoes">Empresa e acesso</a></li>
+    </ul>
+    <div class="navfoot">
+      <div class="sync" id="sync"><i></i><span>Carregando…</span></div>
+      <div class="me"><span id="meEmail"></span><button class="link" data-act="sair">Sair</button></div>
+    </div>
+  </nav>
+  <main id="main"></main>
+</div>
+
+<div class="ovl" id="ovl" hidden><div class="dlg" id="dlg" role="dialog" aria-modal="true"></div></div>
+<div class="toast" id="toast" role="status" hidden></div>
+
+<script src="config.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
